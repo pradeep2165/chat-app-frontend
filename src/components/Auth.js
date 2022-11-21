@@ -33,9 +33,13 @@ const Auth = () => {
         </div>
 
         <button type="submit" className="btn btn-primary">
-          Submit
+           {isSignUp ?'Save' : "User login"}
         </button>
-        <p className="d-inline mx-2">{!isSignUp ? "Don't have":"Have"} account <span className="text-primary" onClick={switchMode}>click</span> here</p>
+        <button type="submit" className="btn btn-danger mx-2">
+          Admin login 
+        </button>
+        <p className=" mx-2">{!isSignUp ? "Don't have":"Have"} account <span className="text-primary" onClick={switchMode}>click</span> here</p>
+        
       </form>
     </div>
   );

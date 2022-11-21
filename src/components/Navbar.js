@@ -1,23 +1,25 @@
-import React from 'react'
+import React from "react";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
     <div>
-      <div className="collapse" id="navbarToggleExternalContent">
-  <div className="bg-dark p-4">
-    <h5 className="text-white h4">Collapsed content</h5>
-    <span className="text-muted">Toggleable via the navbar brand.</span>
-  </div>
-</div>
-<nav className="navbar navbar-dark bg-dark">
-  <div className="container-fluid">
-    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span className="navbar-toggler-icon"></span>
-    </button>
-  </div>
-</nav>
+      <nav className="navbar navbar-expand-lg bg-light bg-dark navbar-dark">
+        <div className="container-fluid">
+          <div>
+            <Link className="navbar-brand" to="/">
+              Let's Chat
+            </Link>
+          </div>
+          <div>
+            <Link className="navbar-brand" to="/auth">
+              Login
+            </Link>
+          </div>
+        </div>
+      </nav>
     </div>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;
