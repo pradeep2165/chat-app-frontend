@@ -1,20 +1,27 @@
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import Auth from "./components/Auth";
-// import Chat from './components/chat/Chat'
+import Chat from './components/chat/Chat'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import ContextState from "./context/ContextState";
+
+
 function App() {
+
   return (
-    <Router>
-      <>
-        <Navbar />
-        <Routes>
-          <Route path="/home" element={<Home />} />
-          <Route path="/auth" element={<Auth />} />
-          {/* <Route path="/chat" element={<Chat />} /> */}
-        </Routes>
-      </>
-    </Router>
+    <ContextState>
+      <Router>
+        <>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Home/>} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/auth" element={<Auth />} />
+            <Route path="/chat" element={<Chat />} />
+          </Routes>
+        </>
+      </Router>
+    </ContextState>
   );
 }
 
