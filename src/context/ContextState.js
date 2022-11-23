@@ -63,7 +63,7 @@ const ContextState = ({ children }) => {
       body: JSON.stringify(data),
     });
     const json = await response.json();
-    console.log(json);
+
   };
   const getAllData = async () => {
     const response = await fetch("http://localhost:5000/posts", {
@@ -94,7 +94,7 @@ const ContextState = ({ children }) => {
       body: JSON.stringify({ id }),
     });
     const json = await response.json();
-    console.log(json);
+    
   };
   const activeUsers = async (id) => {
     const response = await fetch("http://localhost:5000/user/activeUsers", {
