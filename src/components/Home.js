@@ -53,14 +53,14 @@ const Home = () => {
 
     
   return (
-    <div className=" bg-warning p-2 text-dark bg-opacity-75 d-flex">
+    <div className=" bg-warning p-2 text-dark bg-opacity-75 justify-content-center">
 {!profile && <div>
       <img src={image} alt="" />
       </div>
 }      
 
-{profile &&<div className="">
-        <form className=" justify-content-center border border-3 mt-5 w-md-25 pb-2">
+{profile &&<div className="continer w-md-25 align-center col-md-4 margin-auto">
+        <form className="m-auto border border-3 mt-5 pb-2">
           <div className="mb-3 text-center">
             {message &&<span>{message}</span>}
             <label  className="form-label" >
@@ -68,7 +68,7 @@ const Home = () => {
             </label>
             <input type="text" className="form-control" name="chatId" onChange={(e)=>setChatId(e.target.value)} aria-describedby="emailHelp"  placeholder="Join with existing /create new"/>
           </div>
-          <div className="d-flex">
+          <div className="d-flex justify-content-end">
             <button type="button" onClick={handleJoin} className="btn btn-primary mx-2">
               Join
             </button>
