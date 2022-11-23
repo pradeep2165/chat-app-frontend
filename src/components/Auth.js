@@ -8,11 +8,10 @@ const Auth = () => {
   const [form, setForm] = useState(initialState);
   const navigate = useNavigate();
   const [message, setMessage] = useState("");
-  
-  
-const profile = JSON.parse(localStorage.getItem("profile"));
-  if(profile){
-    navigate("/home", {replace: true})
+
+  const profile = JSON.parse(localStorage.getItem("profile"));
+  if (profile) {
+    navigate("/home", { replace: true });
   }
 
   const handleChange = (e) => {
@@ -35,13 +34,13 @@ const profile = JSON.parse(localStorage.getItem("profile"));
       });
       const json = await response.json();
       if (!json.message) {
-        localStorage.setItem("profile",  json.result );
-        localStorage.setItem("token", json.token);
+        localStorage.setItem("profile", JSON.stringify(json.result));
+        localStorage.setItem("token", JSON.stringify(json.token));
         navigate("/home", { replace: true });
       } else {
         setMessage(json.message);
       }
-    }else{
+    } else {
       const response = await fetch("http://localhost:5000/user/signin", {
         method: "POST",
         headers: {
@@ -51,15 +50,15 @@ const profile = JSON.parse(localStorage.getItem("profile"));
       });
       const json = await response.json();
       if (!json.message) {
-        localStorage.setItem("profile", JSON.stringify( json.result ));
-        localStorage.setItem("token", JSON.stringify( json.token ));
+        localStorage.setItem("profile", JSON.stringify(json.result));
+        localStorage.setItem("token", JSON.stringify(json.token));
         navigate("/home", { replace: true });
       } else {
         setMessage(json.message);
       }
     }
   };
-  const adminLogin=async()=>{
+  const adminLogin = async () => {
     const response = await fetch("http://localhost:5000/user/adminSignin", {
       method: "POST",
       headers: {
@@ -69,19 +68,16 @@ const profile = JSON.parse(localStorage.getItem("profile"));
     });
     const json = await response.json();
     if (!json.message) {
-      localStorage.setItem("profile", JSON.stringify( json.result ));
-      localStorage.setItem("token", JSON.stringify( json.token ));
+      localStorage.setItem("profile", JSON.stringify(json.result));
+      localStorage.setItem("token", JSON.stringify(json.token));
       navigate("/admin", { replace: true });
     } else {
       setMessage(json.message);
     }
-  }
-
-  
-  
+  };
 
   return (
-    <div className="container col-md-3 ">
+    <div className="container col-md-3 bg-warning">
       <form className="mt-5 border border-primary p-3 rounded bg-dark text-light" onSubmit={handleSubmit}>
         {message && <span>{message}</span>}
         {isSignUp ? <h1>SignUp</h1> : <h1>Login</h1>}
@@ -111,9 +107,11 @@ const profile = JSON.parse(localStorage.getItem("profile"));
         <button type="submit" className="btn btn-primary">
           {isSignUp ? "Save" : "User login"}
         </button>
-      {!isSignUp && <button type="button" className="btn btn-danger mx-2" onClick={adminLogin}>
-        Admin login
-      </button> }
+        {!isSignUp && (
+          <button type="button" className="btn btn-danger mx-2" onClick={adminLogin}>
+            Admin login
+          </button>
+        )}
         <p className=" mx-2">
           {!isSignUp ? "Don't have" : "Have"} account{" "}
           <span className="text-primary" onClick={switchMode}>
@@ -122,7 +120,6 @@ const profile = JSON.parse(localStorage.getItem("profile"));
           here
         </p>
         <hr />
-
       </form>
     </div>
   );
