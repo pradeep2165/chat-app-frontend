@@ -4,6 +4,7 @@ import Auth from "./components/Auth";
 import Chat from './components/chat/Chat'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ContextState from "./context/ContextState";
+import Admin from "./components/Admin";
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
             <Route path="/home" element={<Home />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/chat" element={<Chat />} />
+            <Route path="/admin" element={<Admin />} />
           </Routes>
         </>
       </Router>

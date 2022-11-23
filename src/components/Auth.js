@@ -65,7 +65,7 @@ const Auth = () => {
     if (!json.message) {
       localStorage.setItem("profile", JSON.stringify( json.result ));
       localStorage.setItem("token", JSON.stringify( json.token ));
-      navigate("/home", { replace: true });
+      navigate("/admin", { replace: true });
     } else {
       setMessage(json.message);
     }

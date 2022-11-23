@@ -5,26 +5,64 @@ import { useNavigate } from "react-router-dom";
 
 
 const Home = () => {
-  const { chatWithExistingId, chatWithNewId, message, chatId:id } = GetContext();
-  const navigate = useNavigate();
-  const [chatId, setChatId] = useState();
+  const {chatId, setChatId, message, setMessage  } = GetContext();
+  const profile = JSON.parse(localStorage.getItem("profile"));
 
+  const navigate = useNavigate();
     const handleJoin =async()=>{
-       console.log(await chatWithExistingId(chatId));
+      //  console.log(await chatWithExistingId(chatId));
+      const response = await fetch("http://localhost:5000/posts/getChatId", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ chatId: chatId }),
+      });
+      const json = await response.json();
+      if(json){
+        setChatId(json?.chatId);
+        navigate("/chat")
+  
+      }else{
+        setMessage("click on create");
+      }
+      
     }
+
+    
     const handleCreate =async()=>{
-      console.log(await chatWithNewId(chatId));
+      // console.log(await chatWithNewId(chatId));
+      const response = await fetch("http://localhost:5000/posts/createChatId", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ chatId: chatId }),
+      });
+      const json = await response.json();
+      if(!json.message){
+    
+        console.log(json);
+        navigate("/chat")
+  
+      }else{
+        setMessage("try with new id")
+      }
+      
     }
 
     
   return (
     <div className=" bg-warning p-2 text-dark bg-opacity-75 d-flex">
-      {/* <div>
+{!profile && <div>
       <img src={image} alt="" />
-      </div> */}
-      <div className="">
+      </div>
+}      
+
+{profile &&<div className="">
         <form className=" justify-content-center border border-3 mt-5 w-md-25 pb-2">
           <div className="mb-3 text-center">
+            {message &&<span>{message}</span>}
             <label  className="form-label" >
               Let's Chat
             </label>
@@ -39,7 +77,7 @@ const Home = () => {
             </button>
           </div>
         </form>
-      </div>
+      </div>}
     </div>
   );
 };

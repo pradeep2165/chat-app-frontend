@@ -7,8 +7,9 @@ import Input from "../Input/Input";
 import TextContainer from '../TextContainer/TextContainer';
 
 const Chat = () => {
-  const chatId = "pradeep123";
-  const userid = "gokula@gmail.com";
+  const {chatId} = GetContext();
+  const profile = JSON.parse(localStorage.getItem("profile"));
+  const userid = profile?.email;
   const { getPost, postData, createPost } = GetContext();
   const [message, setMessage] = useState("");
   useEffect(() => {
