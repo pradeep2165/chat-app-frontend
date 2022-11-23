@@ -60,6 +60,7 @@ const ContextState = ({ children }) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "authorization" : `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
       },
       body: JSON.stringify(data),
     });

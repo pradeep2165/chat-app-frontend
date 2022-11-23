@@ -8,6 +8,12 @@ const Auth = () => {
   const [form, setForm] = useState(initialState);
   const navigate = useNavigate();
   const [message, setMessage] = useState("");
+  
+  
+const profile = JSON.parse(localStorage.getItem("profile"));
+  if(profile){
+    navigate("/home", {replace: true})
+  }
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
