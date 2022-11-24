@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { GetContext } from "../context/ContextState";
 import exportFromJSON from "export-from-json";
+import Alert from "./Alert";
 
 const Admin = () => {
   const navigate = useNavigate();
@@ -11,12 +12,16 @@ const Admin = () => {
     navigate("/auth", { replace: true });
   }
 
-  const { getAllData, postData, getAllChatIds, allChatIds } = GetContext();
+  const { getAllData, postData, getAllChatIds, allChatIds, alert, setAlert } = GetContext();
 
   useEffect(() => {
     getAllData();
     getAllChatIds();
   }, []);
+
+  setTimeout(() => {
+    setAlert(null);
+  }, 2000);
 
   const downloadTxt = () => {
     const data = [postData];
@@ -38,6 +43,7 @@ const Admin = () => {
   };
   return (
     <div className="  mt-2 p-2 text-dark bg-opacity-10">
+      {alert && <Alert/>}
       <h1>Admin</h1>
 
       <div className="d-flex container overflow-auto p-2">
@@ -45,7 +51,7 @@ const Admin = () => {
           <h1>Chat Data</h1>
           <div style={{ height: "400px" }} className="overflow-auto border border-2">
             {allChatIds.map((x) => (
-              <div key={x}>
+              <div key={x._id}>
                 
                 <div className="accordion" id="accordionExample">
                   <div className="accordion-item">

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import { useNavigate } from "react-router-dom";
+import { GetContext } from "../context/ContextState";
 
 const Auth = () => {
   const initialState = { name: "", email: "", password: "" };
@@ -8,7 +9,7 @@ const Auth = () => {
   const [form, setForm] = useState(initialState);
   const navigate = useNavigate();
   const [message, setMessage] = useState("");
-
+  const {setAlert} = GetContext();
   const profile = JSON.parse(localStorage.getItem("profile"));
   if (profile) {
     navigate("/home", { replace: true });
@@ -37,6 +38,7 @@ const Auth = () => {
         localStorage.setItem("profile", JSON.stringify(json.result));
         localStorage.setItem("token", JSON.stringify(json.token));
         navigate("/home", { replace: true });
+        setAlert(true)
       } else {
         setMessage(json.message);
       }
@@ -53,6 +55,7 @@ const Auth = () => {
         localStorage.setItem("profile", JSON.stringify(json.result));
         localStorage.setItem("token", JSON.stringify(json.token));
         navigate("/home", { replace: true });
+        setAlert(true)
       } else {
         setMessage(json.message);
       }
@@ -70,6 +73,7 @@ const Auth = () => {
     if (!json.message) {
       localStorage.setItem("profile", JSON.stringify(json.result));
       localStorage.setItem("token", JSON.stringify(json.token));
+      setAlert(true)
       navigate("/admin", { replace: true });
     } else {
       setMessage(json.message);
@@ -77,7 +81,7 @@ const Auth = () => {
   };
 
   return (
-    <div className="container col-md-3 bg-warning">
+    <div className="container-md col-md-3 bg-warning ">
       <form className="mt-5 border border-primary p-3 rounded bg-dark text-light" onSubmit={handleSubmit}>
         {message && <span>{message}</span>}
         {isSignUp ? <h1>SignUp</h1> : <h1>Login</h1>}
@@ -119,7 +123,6 @@ const Auth = () => {
           </span>{" "}
           here
         </p>
-        <hr />
       </form>
     </div>
   );

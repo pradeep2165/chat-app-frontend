@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import image from "../images/Capture.PNG";
 import { GetContext } from "../context/ContextState";
 import { useNavigate } from "react-router-dom";
+import Alert from "./Alert";
 
 const Home = () => {
-  const { chatId, setChatId, message, setMessage } = GetContext();
+  const { chatId, setChatId, message, setMessage, alert, setAlert } = GetContext();
   const profile = JSON.parse(localStorage.getItem("profile"));
-
+  
   const navigate = useNavigate();
   const handleJoin = async () => {
     const response = await fetch("http://localhost:5000/posts/getChatId", {
@@ -42,8 +43,13 @@ const Home = () => {
     }
   };
 
+      setTimeout(() => {
+      setAlert(null);
+    }, 2000);
+  
   return (
     <div className=" bg-warning p-2 text-dark bg-opacity-75 justify-content-center">
+      {alert && <Alert/>}
       {!profile && (
         <div className="d-flex justify-content-center" style={{width:'vh'}}>
           <img src={image} alt="" />
@@ -51,8 +57,8 @@ const Home = () => {
       )}
 
       {profile && (
-        <div className="continer w-md-25 align-center col-md-3 m-auto ">
-          <form className="m-auto border border-3 mt-2 pb-2 bg-secondary rounded p-3 text-light">
+        <div className="continer w-md-25 align-center col-md-3 m-auto">
+          <form className="m-auto border border-3 mt-4 pb-2 bg-secondary rounded p-3 text-light">
             <div className="mb-3 text-center">
               {message && <span>{message}</span>}
               <label className="form-label">Let's Chat</label>

@@ -17,6 +17,7 @@ const Chat = () => {
   }
 
   const userid = profile?.email;
+  const name = profile?.name
   const { getPost, postData, createPost, aUsers, activeUsers } = GetContext();
   const [message, setMessage] = useState("");
   const chatId = localStorage.getItem('chatId');

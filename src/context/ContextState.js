@@ -8,7 +8,7 @@ const ContextState = ({ children }) => {
   const [postData, setPostData] = useState([]);
   const [allChatIds, setAllChatIds] = useState([]);
   const [aUsers, setAUsers] = useState([]);
-
+  const [alert, setAlert] = useState(false);
   // const chatWithExistingId = async (id) => {
   //   const response = await fetch("http://localhost:5000/posts/getChatId", {
   //     method: "POST",
@@ -106,7 +106,7 @@ const ContextState = ({ children }) => {
     const json = await response.json();
     setAUsers(json.result)
   };
-  return <ContextApi.Provider value={{ chatId, setChatId, message, setMessage, getPost, postData, createPost, getAllData, getAllChatIds, allChatIds, modifyStatus, aUsers, activeUsers }}>{children}</ContextApi.Provider>;
+  return <ContextApi.Provider value={{ chatId, setChatId, message, setMessage, getPost, postData, createPost, getAllData, getAllChatIds, allChatIds, modifyStatus, aUsers, activeUsers, alert, setAlert }}>{children}</ContextApi.Provider>;
 };
 
 export const GetContext = () => useContext(ContextApi);
