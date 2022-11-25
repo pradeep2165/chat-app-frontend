@@ -55,12 +55,12 @@ const Admin = () => {
                 
                 <div className="accordion" id="accordionExample">
                   <div className="accordion-item">
-                    <h2 className="accordion-header" id="headingOne">
-                      <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    <h2 className="accordion-header" id={x._id}>
+                      <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={`#x-${x._id}`} aria-expanded="true" aria-controls="collapseOne">
                       <h6 className="text-info rounded text-center">{x.chatId}</h6>
                       </button>
                     </h2>
-                    <div id="collapseOne" className="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div id={`x-${x._id}`} className="accordion-collapse collapse" aria-labelledby={x._id} data-bs-parent="#accordionExample">
                       <div className="accordion-body">
                         {postData
                           .filter((y) => y.chatId == x.chatId)

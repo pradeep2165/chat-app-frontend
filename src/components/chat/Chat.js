@@ -36,7 +36,7 @@ const Chat = () => {
     
     <div className="outerContainer">
       <div className="container p-1">
-        <InfoBar room={userid} />
+        <InfoBar room={chatId} />
         <Messages messages={postData} name={userid} />
         <Input message={message} setMessage={setMessage} sendMessage={sendMessage} />
       </div>
